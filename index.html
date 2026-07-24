@@ -1,331 +1,493 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yilin Zou | Portfolio</title>
-<style>
-  :root{
-    --ink:#1a1f2b;
-    --ink-soft:#4a5265;
-    --paper:#ffffff;
-    --paper-soft:#f6f7fb;
-    --line:#e6e8f0;
-    --accent:#2b3a67;
-    --accent-soft:#eef0f8;
-    --tag-bg:#eef1f8;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{
-    font-family:"Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-    color:var(--ink);
-    background:var(--paper-soft);
-    line-height:1.6;
-  }
-  a{color:var(--accent); text-decoration:none;}
-  a:hover{text-decoration:underline;}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Yilin (Elaine) Zou — data and operations analyst specializing in business intelligence, predictive analytics, risk, and AI automation.">
+  <title>Yilin Zou | Data &amp; Operations Portfolio</title>
+  <style>
+    :root {
+      --navy: #10233f;
+      --blue: #2f66f5;
+      --cyan: #24b6a7;
+      --ink: #162033;
+      --muted: #617087;
+      --paper: #ffffff;
+      --soft: #f4f7fb;
+      --line: #dce4ef;
+      --shadow: 0 16px 44px rgba(16, 35, 63, .08);
+      --radius: 22px;
+      --sidebar: 290px;
+    }
 
-  .wrap{max-width:880px; margin:0 auto; padding:0 24px;}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 28px; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--soft);
+      font: 16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #90aefd; outline-offset: 4px; }
+    strong { color: var(--navy); }
 
-  /* Header / Hero */
-  header{
-    background:var(--paper);
-    border-bottom:1px solid var(--line);
-    padding:64px 0 48px;
-  }
-  .hero{
-    display:flex;
-    align-items:center;
-    gap:36px;
-  }
-  .avatar{
-    width:140px; height:140px;
-    border-radius:50%;
-    flex-shrink:0;
-    background:linear-gradient(135deg, var(--accent), #5a6ea8);
-    display:flex; align-items:center; justify-content:center;
-    color:#fff; font-size:44px; font-weight:600;
-    letter-spacing:1px;
-    object-fit:cover;
-    border:3px solid var(--paper);
-    box-shadow:0 4px 18px rgba(43,58,103,0.18);
-  }
-  .hero-text h1{
-    font-size:32px;
-    font-weight:700;
-    letter-spacing:0.2px;
-  }
-  .hero-text .role{
-    margin-top:6px;
-    font-size:17px;
-    color:var(--ink-soft);
-    font-weight:500;
-  }
-  .contact-line{
-    margin-top:14px;
-    font-size:14px;
-    color:var(--ink-soft);
-    display:flex; flex-wrap:wrap; gap:14px;
-  }
-  .contact-line span{display:flex; align-items:center; gap:6px;}
+    .sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: var(--sidebar);
+      display: flex;
+      flex-direction: column;
+      padding: 42px 34px 28px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(36, 182, 167, .24), transparent 28%),
+        linear-gradient(160deg, #102b4e, #0b182c 72%);
+      z-index: 10;
+    }
+    .monogram {
+      width: 70px;
+      height: 70px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 20px;
+      background: rgba(255,255,255,.08);
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+    .sidebar h1 { margin: 0; font-size: 25px; line-height: 1.2; }
+    .sidebar .title { margin: 10px 0 30px; color: #b8c8dc; font-size: 14px; }
+    .nav { display: grid; gap: 4px; }
+    .nav a {
+      padding: 9px 12px;
+      border-radius: 10px;
+      color: #b8c8dc;
+      font-size: 14px;
+      transition: .2s ease;
+    }
+    .nav a:hover, .nav a.active { color: #fff; background: rgba(255,255,255,.1); }
+    .sidebar-contact {
+      display: grid;
+      gap: 9px;
+      margin-top: auto;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,.14);
+      font-size: 13px;
+    }
+    .sidebar-contact a { color: #dce8f7; }
+    .sidebar-contact a:hover { color: #fff; }
 
-  /* Nav */
-  nav{
-    background:var(--paper);
-    border-bottom:1px solid var(--line);
-    position:sticky; top:0; z-index:10;
-  }
-  nav .wrap{display:flex; gap:28px; padding:14px 24px;}
-  nav a{
-    font-size:14px; font-weight:600; color:var(--ink-soft);
-    text-transform:uppercase; letter-spacing:0.5px;
-  }
-  nav a:hover{color:var(--accent); text-decoration:none;}
+    main { margin-left: var(--sidebar); }
+    .container { width: min(1080px, calc(100% - 64px)); margin: 0 auto; }
+    section { padding: 82px 0; scroll-margin-top: 20px; }
+    section + section { border-top: 1px solid var(--line); }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h2 { margin: 0 0 28px; color: var(--navy); font-size: clamp(30px, 4vw, 44px); line-height: 1.15; }
+    h3 { color: var(--navy); }
+    .lede { max-width: 760px; color: var(--muted); font-size: 18px; }
 
-  section{padding:48px 0;}
-  section h2{
-    font-size:13px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-    color:var(--accent);
-    font-weight:700;
-    margin-bottom:24px;
-    display:flex; align-items:center; gap:10px;
-  }
-  section h2::after{
-    content:"";
-    flex:1;
-    height:1px;
-    background:var(--line);
-  }
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      align-items: center;
+      background:
+        radial-gradient(circle at 90% 15%, rgba(47,102,245,.12), transparent 34%),
+        var(--paper);
+    }
+    .hero h2 { max-width: 880px; margin: 12px 0 24px; font-size: clamp(43px, 7vw, 78px); letter-spacing: -.045em; }
+    .hero h2 span { color: var(--blue); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      border: 1px solid var(--navy);
+      border-radius: 999px;
+      font-weight: 750;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .button.primary { color: #fff; background: var(--navy); }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(16,35,63,.14); }
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 58px; }
+    .metric { padding: 22px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.72); }
+    .metric b { display: block; color: var(--navy); font-size: 27px; }
+    .metric span { color: var(--muted); font-size: 13px; }
 
-  /* About */
-  .about p{color:var(--ink-soft); font-size:15.5px; max-width:720px;}
+    .about-grid, .education-grid, .contact-card { display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; }
+    .panel, .job, .education-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    .panel { padding: 30px; }
+    .panel p { margin: 0; color: var(--muted); }
+    .strengths { display: grid; gap: 15px; }
+    .strength { padding-left: 16px; border-left: 3px solid var(--cyan); }
+    .strength b { display: block; }
+    .strength span { color: var(--muted); font-size: 14px; }
 
-  /* Education */
-  .edu-item{
-    display:flex; justify-content:space-between; align-items:baseline;
-    padding:16px 0; border-bottom:1px solid var(--line);
-    flex-wrap:wrap; gap:4px;
-  }
-  .edu-item:last-child{border-bottom:none;}
-  .edu-main .school{font-weight:700; font-size:16px;}
-  .edu-main .degree{color:var(--ink-soft); font-size:14.5px; font-style:italic; margin-top:2px;}
-  .edu-meta{text-align:right; font-size:14px; color:var(--ink-soft); white-space:nowrap;}
+    .job { margin-top: 28px; overflow: hidden; }
+    .job-header { display: flex; justify-content: space-between; gap: 24px; padding: 30px; border-bottom: 1px solid var(--line); }
+    .job-header h3 { margin: 0 0 4px; font-size: 23px; }
+    .company { color: var(--blue); }
+    .job-meta { flex: 0 0 auto; color: var(--muted); font-size: 14px; text-align: right; }
+    .projects { display: grid; gap: 0; }
+    .project { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr); gap: 28px; padding: 30px; }
+    .project + .project { border-top: 1px solid var(--line); }
+    .project h4 { margin: 0 0 10px; color: var(--navy); font-size: 19px; }
+    .project p { margin: 0 0 14px; color: var(--muted); }
+    .impact { padding: 14px 16px; border-left: 3px solid var(--cyan); background: #f0fbf9; border-radius: 0 10px 10px 0; font-size: 14px; }
+    .impact b { display: block; color: #147b70; text-transform: uppercase; letter-spacing: .08em; font-size: 11px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
+    .tag { padding: 5px 10px; border: 1px solid #d7e0ed; border-radius: 999px; color: #42526a; background: #f8fafc; font-size: 12px; font-weight: 700; }
+    .visual {
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      border: 1.5px dashed #aebed2;
+      border-radius: 16px;
+      color: #718197;
+      background:
+        linear-gradient(135deg, rgba(47,102,245,.05), rgba(36,182,167,.07)),
+        repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(16,35,63,.035) 28px);
+      text-align: center;
+    }
+    .visual b { display: block; margin-bottom: 5px; color: var(--navy); }
 
-  /* Experience */
-  .job{
-    padding:22px 0;
-    border-bottom:1px solid var(--line);
-  }
-  .job:last-child{border-bottom:none;}
-  .job-head{
-    display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:4px;
-    margin-bottom:8px;
-  }
-  .job-title{font-size:16.5px; font-weight:700;}
-  .job-title .company{color:var(--accent);}
-  .job-sub{font-size:14px; color:var(--ink-soft); font-style:italic;}
-  .job-meta{font-size:13.5px; color:var(--ink-soft); white-space:nowrap;}
-  .job ul{margin-left:18px; margin-top:6px;}
-  .job li{font-size:14.5px; color:var(--ink-soft); margin-bottom:8px;}
-  .job li:last-child{margin-bottom:0;}
-  .job li b{color:var(--ink); font-weight:600;}
+    .skill-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .skill-card { padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); }
+    .skill-card h3 { margin: 0 0 16px; font-size: 17px; }
+    .skill-card .tags { margin: 0; }
 
-  /* Skills */
-  .skill-group{margin-bottom:18px;}
-  .skill-group:last-child{margin-bottom:0;}
-  .skill-label{font-size:14px; font-weight:700; margin-bottom:10px;}
-  .tags{display:flex; flex-wrap:wrap; gap:8px;}
-  .tag{
-    background:var(--tag-bg);
-    color:var(--accent);
-    font-size:13px; font-weight:600;
-    padding:6px 12px;
-    border-radius:20px;
-  }
+    .education-card { padding: 28px; }
+    .education-card h3 { margin: 0 0 5px; font-size: 19px; }
+    .education-card p { margin: 0; color: var(--muted); }
+    .education-card .date { margin-top: 16px; color: var(--blue); font-size: 13px; font-weight: 800; }
+    .fun-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .fun { padding: 22px 14px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); text-align: center; }
+    .fun span { display: block; margin-bottom: 8px; font-size: 28px; }
+    .fun b { font-size: 13px; }
 
-  footer{
-    text-align:center;
-    padding:32px 0 48px;
-    font-size:13px;
-    color:var(--ink-soft);
-  }
+    .contact-card { align-items: center; padding: 38px; color: #fff; background: var(--navy); border-radius: 26px; }
+    .contact-card h2 { margin-bottom: 12px; color: #fff; }
+    .contact-card p { margin: 0; color: #b9c8da; }
+    .contact-links { display: grid; gap: 10px; }
+    .contact-links a { padding: 13px 16px; border: 1px solid rgba(255,255,255,.2); border-radius: 12px; background: rgba(255,255,255,.07); }
+    footer { padding: 26px 0 44px; color: var(--muted); font-size: 13px; }
 
-  @media (max-width:600px){
-    .hero{flex-direction:column; text-align:center;}
-    .contact-line{justify-content:center;}
-    nav .wrap{gap:16px; overflow-x:auto;}
-    .job-head, .edu-item{flex-direction:column;}
-    .job-meta, .edu-meta{text-align:left;}
-  }
-</style>
+    .mobile-bar { display: none; }
+    @media (max-width: 960px) {
+      :root { --sidebar: 0px; }
+      html { scroll-padding-top: 72px; }
+      .sidebar { display: none; }
+      main { margin-left: 0; }
+      .mobile-bar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 22px;
+        color: #fff;
+        background: rgba(16,35,63,.96);
+        backdrop-filter: blur(12px);
+      }
+      .mobile-bar b { font-size: 14px; }
+      .mobile-bar a { padding: 7px 12px; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; font-size: 12px; }
+      .hero { min-height: auto; padding-top: 34px; }
+    }
+    @media (max-width: 760px) {
+      .container { width: min(100% - 34px, 1080px); }
+      section { padding: 58px 0; }
+      .hero h2 { font-size: clamp(40px, 13vw, 58px); }
+      .metrics { grid-template-columns: repeat(2, 1fr); margin-top: 42px; }
+      .about-grid, .education-grid, .contact-card, .project { grid-template-columns: 1fr; }
+      .job-header { display: block; }
+      .job-meta { margin-top: 12px; text-align: left; }
+      .project { padding: 24px; }
+      .visual { min-height: 180px; }
+      .skill-columns { grid-template-columns: 1fr; }
+      .fun-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
 </head>
 <body>
-
-<header>
-  <div class="wrap hero">
-    <img class="avatar" src="photo.jpg" alt="Yilin Zou" onerror="this.removeAttribute('src'); this.textContent='YZ';">
-    <div class="hero-text">
-      <h1>Yilin (Elaine) Zou</h1>
-      <div class="role">Operational Data Analyst · Predictive Analytics &amp; Risk Management</div>
-      <div class="contact-line">
-        <span>✉️ yilin1010110@gmail.com</span>
-        <span>📞 217-402-1709</span>
-        <span>📍 Seattle, WA</span>
-      </div>
+  <aside class="sidebar" aria-label="Portfolio navigation">
+    <div class="monogram">YZ</div>
+    <h1>Yilin (Elaine) Zou</h1>
+    <p class="title">Data &amp; Operations Analyst<br>Predictive Analytics · BI · AI</p>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#experience">Experience &amp; Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#fun">Fun Facts</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="sidebar-contact">
+      <a href="mailto:yilin1010110@gmail.com">yilin1010110@gmail.com</a>
+      <a href="tel:+12174021709">+1 217 402 1709</a>
+      <a href="https://www.linkedin.com/in/yilin-z-503960212/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <span>Seattle, Washington</span>
     </div>
+  </aside>
+
+  <div class="mobile-bar">
+    <b>Yilin Zou</b>
+    <a href="#contact">Contact</a>
   </div>
-</header>
 
-<nav>
-  <div class="wrap">
-    <a href="#about">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#education">Education</a>
-    <a href="#skills">Skills</a>
-    <a href="#fun">Fun Facts</a>
-  </div>
-</nav>
-
-<main class="wrap">
-
-  <section id="about" class="about">
-<h2>About</h2>
-<p>
-Hi, I'm <b>Yilin (Elaine) Zou</b>, an Operations & Data Analyst passionate about transforming operational data into business decisions.
-My experience spans logistics, insurance, marketing analytics, risk modeling, BI development, and AI workflow automation.
-I enjoy building end-to-end analytics products—from ETL pipelines and dashboards to LLM-powered agents—that help teams save time,
-reduce operational risk, and make faster decisions. I am especially interested in data products, business intelligence, applied AI,
-and scalable analytics systems.
-</p>
-</section>
-
-  <section id="experience">
-    <h2>Work Experience</h2><p style='color:#4a5265;margin-bottom:20px'>Each role below is organized into representative projects. Consider adding dashboard screenshots, Tableau visualizations, architecture diagrams, and logistics photos to make the portfolio more engaging.</p>
-
-    <div class="job">
-      <div class="job-head">
-        <div>
-          <div class="job-title">Operational Data Analyst · <span class="company">Gofo, Inc.</span></div>
-          <div class="job-sub">Seattle, WA</div>
+  <main>
+    <section class="hero" id="top">
+      <div class="container">
+        <p class="eyebrow">Data · Decisions · Measurable Impact</p>
+        <h2>I turn operational complexity into <span>clear, scalable decisions.</span></h2>
+        <p class="lede">I am a data and operations analyst focused on business intelligence, predictive analytics, risk modeling, and AI-powered workflow automation.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#experience">Explore my projects</a>
+          <a class="button" href="https://www.linkedin.com/in/yilin-z-503960212/" target="_blank" rel="noopener">View LinkedIn</a>
         </div>
-        <div class="job-meta">Mar 2026 – Present</div>
-      </div>
-      <ul>
-        <li>Engineered end-to-end <b>BI pipelines in SQL</b> to build <b>Tableau dashboards</b> tracking fleet utilization, route efficiency, and safety KPIs for senior operations leadership, improving on-time delivery rate by 8% within 3 months.</li>
-        <li>Built a Python-based exception monitoring <b>AI agent using the Anthropic SDK</b>: real-time anomaly classification and auto-routed Slack alerts across 30+ stations, reducing response time by ~80% and eliminating ~2 hrs/day of manual audits.</li>
-        <li>Analyzed regional cost structures with <b>Snowflake SQL</b> and Python (pandas, NumPy), traced cost-per-package variance to transportation inefficiencies, and identified 11% idle fleet capacity.</li>
-      </ul>
-    </div>
-
-    <div class="job">
-      <div class="job-head">
-        <div>
-          <div class="job-title">Data Science Intern · <span class="company">Legacy Agencies</span></div>
-          <div class="job-sub">Oak Brook, IL</div>
+        <div class="metrics" aria-label="Selected impact">
+          <div class="metric"><b>80%</b><span>faster exception response</span></div>
+          <div class="metric"><b>8%</b><span>on-time delivery lift</span></div>
+          <div class="metric"><b>4.58%</b><span>forecast MAPE achieved</span></div>
+          <div class="metric"><b>3</b><span>peer-reviewed publications</span></div>
         </div>
-        <div class="job-meta">Jun 2025 – Aug 2025</div>
       </div>
-      <ul>
-        <li>Engineered <b>ETL pipelines in Python</b> to standardize multi-source customer datasets, reducing preprocessing error rate by 33%.</li>
-        <li>Built a high-value customer profiling pipeline using <b>Random Forest</b> and RFM feature engineering, improving targeting precision by 9%.</li>
-        <li>Ran funnel analysis on 20K+ records (Python, PySpark, SQL), designed an <b>A/B test</b> on an under-converting segment, and achieved a 12% lift in click-to-purchase conversion.</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="job">
-      <div class="job-head">
-        <div>
-          <div class="job-title">Risk Modeling Data Scientist (COOP) · <span class="company">Reinsurance Group of America</span></div>
-          <div class="job-sub">Champaign, IL</div>
+    <section id="about">
+      <div class="container">
+        <p class="eyebrow">About</p>
+        <h2>Analytics built for action.</h2>
+        <div class="about-grid">
+          <div class="panel">
+            <p>I work where data, operations, and business strategy meet. My experience spans last-mile logistics, insurance and annuity risk, customer analytics, and academic research. I enjoy building the full analytics lifecycle—from clean data foundations and predictive models to dashboards and automated decision workflows that people actually use.</p>
+          </div>
+          <div class="panel strengths">
+            <div class="strength"><b>Business-first thinking</b><span>Start with the decision, then design the analysis.</span></div>
+            <div class="strength"><b>End-to-end ownership</b><span>ETL, modeling, visualization, automation, and delivery.</span></div>
+            <div class="strength"><b>Clear communication</b><span>Translate technical findings into practical next steps.</span></div>
+          </div>
         </div>
-        <div class="job-meta">Jan 2025 – May 2025</div>
       </div>
-      <ul>
-        <li>Conducted EDA with IQR-based outlier detection, built and deployed an <b>XGBoost model</b> to forecast annuity cash flows, reducing MAPE from 10% to 4.58%.</li>
-        <li>Developed a parametric stress testing framework using RP-2014/MP-2021 mortality assumptions, quantifying a 15% increase in 30-year present value under worst-case scenarios.</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="job">
-      <div class="job-head">
-        <div>
-          <div class="job-title">Quantitative Research Analyst · <span class="company">ShanghaiTech University</span></div>
-          <div class="job-sub">Shanghai, China</div>
+    <section id="experience">
+      <div class="container">
+        <p class="eyebrow">Experience &amp; Projects</p>
+        <h2>Selected work and business outcomes.</h2>
+
+        <article class="job">
+          <header class="job-header">
+            <div><h3>Operational Data Analyst · <span class="company">Gofo, Inc.</span></h3><span>Last-mile logistics and operations analytics</span></div>
+            <div class="job-meta">Seattle, WA<br>Mar 2026 — Present</div>
+          </header>
+          <div class="projects">
+            <div class="project">
+              <div>
+                <h4>Operations Command Center</h4>
+                <p>Designed end-to-end SQL pipelines and Tableau reporting for fleet utilization, route efficiency, delivery performance, and safety KPIs used by operations leadership.</p>
+                <div class="impact"><b>Business impact</b>Improved on-time delivery by 8% within three months by making regional bottlenecks and route-level performance visible.</div>
+                <div class="tags"><span class="tag">SQL</span><span class="tag">Tableau</span><span class="tag">BI Pipelines</span><span class="tag">KPI Design</span></div>
+              </div>
+              <div class="visual"><div><b>Tableau Dashboard Placeholder</b>Replace with fleet utilization, route efficiency, or safety KPI screenshots.</div></div>
+            </div>
+            <div class="project">
+              <div>
+                <h4>AI Exception Monitoring Agent</h4>
+                <p>Built a Python agent that classifies operational anomalies in real time and routes contextual Slack alerts across more than 30 stations.</p>
+                <div class="impact"><b>Business impact</b>Reduced exception response time by approximately 80% and eliminated about two hours of manual auditing per day.</div>
+                <div class="tags"><span class="tag">Python</span><span class="tag">Anthropic SDK</span><span class="tag">Slack</span><span class="tag">Automation</span></div>
+              </div>
+              <div class="visual"><div><b>Workflow Diagram Placeholder</b>Replace with the anomaly classification and alert-routing architecture.</div></div>
+            </div>
+            <div class="project">
+              <div>
+                <h4>Regional Cost &amp; Capacity Analysis</h4>
+                <p>Analyzed regional cost structures, package economics, and transportation patterns to isolate the operational drivers behind cost-per-package variance.</p>
+                <div class="impact"><b>Business impact</b>Identified 11% idle fleet capacity and surfaced transportation inefficiencies for targeted cost optimization.</div>
+                <div class="tags"><span class="tag">Snowflake</span><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">NumPy</span></div>
+              </div>
+              <div class="visual"><div><b>Cost Analysis Placeholder</b>Replace with a regional variance chart, capacity map, or executive summary.</div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="job">
+          <header class="job-header">
+            <div><h3>Data Science Intern · <span class="company">Legacy Agencies</span></h3><span>Customer analytics and experimentation</span></div>
+            <div class="job-meta">Oak Brook, IL<br>Jun 2025 — Aug 2025</div>
+          </header>
+          <div class="projects">
+            <div class="project">
+              <div>
+                <h4>Customer Data Foundation</h4>
+                <p>Engineered Python ETL pipelines to standardize customer data from multiple sources and create a reliable analytical layer.</p>
+                <div class="impact"><b>Business impact</b>Reduced preprocessing errors by 33%, improving repeatability and trust in downstream analysis.</div>
+                <div class="tags"><span class="tag">Python</span><span class="tag">ETL</span><span class="tag">Data Quality</span></div>
+              </div>
+              <div class="visual"><div><b>Pipeline Placeholder</b>Replace with a source-to-model data flow.</div></div>
+            </div>
+            <div class="project">
+              <div>
+                <h4>High-Value Customer Targeting</h4>
+                <p>Combined RFM feature engineering with a Random Forest model to build actionable customer profiles and improve campaign targeting.</p>
+                <div class="impact"><b>Business impact</b>Improved targeting precision by 9% and gave marketing teams clearer segment definitions.</div>
+                <div class="tags"><span class="tag">Random Forest</span><span class="tag">RFM</span><span class="tag">Feature Engineering</span></div>
+              </div>
+              <div class="visual"><div><b>Segmentation Placeholder</b>Replace with customer clusters, feature importance, or profile cards.</div></div>
+            </div>
+            <div class="project">
+              <div>
+                <h4>Conversion Funnel Experiment</h4>
+                <p>Analyzed more than 20,000 funnel records, located an under-converting segment, and designed an A/B test to validate a targeted intervention.</p>
+                <div class="impact"><b>Business impact</b>Delivered a 12% lift in click-to-purchase conversion for the target segment.</div>
+                <div class="tags"><span class="tag">PySpark</span><span class="tag">SQL</span><span class="tag">A/B Testing</span><span class="tag">Funnel Analysis</span></div>
+              </div>
+              <div class="visual"><div><b>Experiment Placeholder</b>Replace with a funnel view or treatment-versus-control chart.</div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="job">
+          <header class="job-header">
+            <div><h3>Risk Modeling Data Scientist, COOP · <span class="company">Reinsurance Group of America</span></h3><span>Annuity forecasting and actuarial stress testing</span></div>
+            <div class="job-meta">Champaign, IL<br>Jan 2025 — May 2025</div>
+          </header>
+          <div class="projects">
+            <div class="project">
+              <div>
+                <h4>Annuity Cash-Flow Forecasting</h4>
+                <p>Performed exploratory analysis and IQR-based outlier detection, then developed and deployed an XGBoost model for annuity cash-flow forecasting.</p>
+                <div class="impact"><b>Business impact</b>Reduced forecast MAPE from 10% to 4.58%, improving the accuracy of long-horizon planning.</div>
+                <div class="tags"><span class="tag">XGBoost</span><span class="tag">Python</span><span class="tag">EDA</span><span class="tag">Forecasting</span></div>
+              </div>
+              <div class="visual"><div><b>Forecast Placeholder</b>Replace with actual-versus-predicted results or model diagnostics.</div></div>
+            </div>
+            <div class="project">
+              <div>
+                <h4>Mortality Stress-Testing Framework</h4>
+                <p>Developed a parametric stress-testing framework using RP-2014 and MP-2021 mortality assumptions to evaluate scenario sensitivity.</p>
+                <div class="impact"><b>Business impact</b>Quantified a 15% increase in 30-year present value under the worst-case scenario, strengthening risk visibility.</div>
+                <div class="tags"><span class="tag">Risk Modeling</span><span class="tag">Scenario Analysis</span><span class="tag">Actuarial Analytics</span></div>
+              </div>
+              <div class="visual"><div><b>Risk Scenario Placeholder</b>Replace with a sensitivity curve or scenario comparison.</div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="job">
+          <header class="job-header">
+            <div><h3>Quantitative Research Analyst · <span class="company">ShanghaiTech University</span></h3><span>Behavioral research and large-scale data analysis</span></div>
+            <div class="job-meta">Shanghai, China<br>Jun 2022 — May 2024</div>
+          </header>
+          <div class="projects">
+            <div class="project">
+              <div>
+                <h4>Research Data &amp; Statistical Analysis</h4>
+                <p>Managed large-scale datasets across five projects and applied regression, t-tests, ANOVA, and chi-square analysis in Python, R, and Stata.</p>
+                <div class="impact"><b>Business impact</b>Established consistent data-integrity standards and contributed findings to three peer-reviewed publications.</div>
+                <div class="tags"><span class="tag">MySQL</span><span class="tag">Hadoop</span><span class="tag">R</span><span class="tag">Stata</span></div>
+              </div>
+              <div class="visual"><div><b>Research Placeholder</b>Replace with a methods diagram, statistical results, or publication highlights.</div></div>
+            </div>
+            <div class="project">
+              <div>
+                <h4>Multimodal Behavioral Profiling</h4>
+                <p>Built a behavioral profiling pipeline combining NLP sentiment analysis and K-means clustering to identify meaningful audience patterns.</p>
+                <div class="impact"><b>Business impact</b>Improved demographic targeting accuracy by 21%.</div>
+                <div class="tags"><span class="tag">NLP</span><span class="tag">K-means</span><span class="tag">Python</span><span class="tag">Segmentation</span></div>
+              </div>
+              <div class="visual"><div><b>Behavioral Analysis Placeholder</b>Replace with clusters, sentiment distributions, or audience profiles.</div></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <p class="eyebrow">Skills</p>
+        <h2>A practical analytics toolkit.</h2>
+        <div class="skill-columns">
+          <div class="skill-card"><h3>Data &amp; Engineering</h3><div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">R</span><span class="tag">PySpark</span><span class="tag">Snowflake</span><span class="tag">MySQL</span><span class="tag">Hadoop</span><span class="tag">ETL</span></div></div>
+          <div class="skill-card"><h3>Analytics &amp; ML</h3><div class="tags"><span class="tag">XGBoost</span><span class="tag">Random Forest</span><span class="tag">Regression</span><span class="tag">NLP</span><span class="tag">K-means</span><span class="tag">A/B Testing</span><span class="tag">Risk Modeling</span></div></div>
+          <div class="skill-card"><h3>BI &amp; Business</h3><div class="tags"><span class="tag">Tableau</span><span class="tag">Excel</span><span class="tag">VBA</span><span class="tag">SAP</span><span class="tag">KPI Design</span><span class="tag">Data Visualization</span><span class="tag">Stakeholder Communication</span></div></div>
         </div>
-        <div class="job-meta">Jun 2022 – May 2024</div>
       </div>
-      <ul>
-        <li>Managed large-scale datasets across 5 research projects using <b>MySQL and Hadoop</b>, enforcing data integrity standards.</li>
-        <li>Applied regression modeling and hypothesis testing (t-tests, ANOVA, chi-square) in Python, R, and Stata; findings contributed to 3 peer-reviewed publications.</li>
-        <li>Built a multimodal behavioral profiling pipeline (NLP sentiment analysis + K-means clustering), improving demographic targeting accuracy by 21%.</li>
-      </ul>
-    </div>
-  </section>
+    </section>
 
-  <section id="education">
-    <h2>Education</h2>
-    <div class="edu-item">
-      <div class="edu-main">
-        <div class="school">University of Illinois Urbana-Champaign</div>
-        <div class="degree">M.S. in Predictive Analytics &amp; Risk Management</div>
+    <section id="education">
+      <div class="container">
+        <p class="eyebrow">Education</p>
+        <h2>Where quantitative rigor began.</h2>
+        <div class="education-grid">
+          <div class="education-card"><h3>University of Illinois Urbana-Champaign</h3><p>M.S. in Predictive Analytics &amp; Risk Management</p><div class="date">AUG 2024 — DEC 2025 · CHAMPAIGN, IL</div></div>
+          <div class="education-card"><h3>ShanghaiTech University</h3><p>B.S. in Physics</p><div class="date">SEP 2018 — JUN 2022 · SHANGHAI, CHINA</div></div>
+        </div>
       </div>
-      <div class="edu-meta">Champaign, IL<br>Aug 2024 – Dec 2025</div>
-    </div>
-    <div class="edu-item">
-      <div class="edu-main">
-        <div class="school">ShanghaiTech University</div>
-        <div class="degree">B.S. in Physics</div>
+    </section>
+
+    <section id="fun">
+      <div class="container">
+        <p class="eyebrow">Fun Facts</p>
+        <h2>A little beyond the dashboards.</h2>
+        <div class="fun-grid">
+          <div class="fun"><span>☕</span><b>Coffee enthusiast</b></div>
+          <div class="fun"><span>🤖</span><b>AI automation builder</b></div>
+          <div class="fun"><span>📊</span><b>Dashboard storyteller</b></div>
+          <div class="fun"><span>🚚</span><b>Logistics curious</b></div>
+          <div class="fun"><span>🌏</span><b>China &amp; USA</b></div>
+        </div>
       </div>
-      <div class="edu-meta">Shanghai, China<br>Sep 2018 – Jun 2022</div>
-    </div>
-  </section>
+    </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skill-group">
-      <div class="skill-label">Tools</div>
-      <div class="tags">
-        <span class="tag">Python</span><span class="tag">R</span><span class="tag">SQL</span>
-        <span class="tag">Stata</span><span class="tag">PySpark</span><span class="tag">Snowflake</span>
-        <span class="tag">MySQL</span><span class="tag">Hadoop</span><span class="tag">Git</span>
-        <span class="tag">Tableau</span><span class="tag">SAP</span><span class="tag">VBA</span>
-        <span class="tag">Excel</span><span class="tag">SPSS</span><span class="tag">ERP</span>
+    <section id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <div><p class="eyebrow">Contact</p><h2>Let’s turn data into action.</h2><p>I am always glad to connect about analytics, business intelligence, applied AI, and data-driven operations.</p></div>
+          <div class="contact-links">
+            <a href="mailto:yilin1010110@gmail.com">Email · yilin1010110@gmail.com</a>
+            <a href="tel:+12174021709">Phone · +1 217 402 1709</a>
+            <a href="https://www.linkedin.com/in/yilin-z-503960212/" target="_blank" rel="noopener">LinkedIn · View profile ↗</a>
+          </div>
+        </div>
+        <footer>© 2026 Yilin Zou · Designed and built for GitHub Pages.</footer>
       </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-label">Machine Learning &amp; Statistics</div>
-      <div class="tags">
-        <span class="tag">XGBoost</span><span class="tag">Random Forest</span>
-        <span class="tag">Logistic Regression</span><span class="tag">PCA</span>
-        <span class="tag">K-means</span><span class="tag">NLP</span>
-        <span class="tag">A/B Testing</span><span class="tag">Hypothesis Testing</span>
-        <span class="tag">Regression Analysis</span><span class="tag">Feature Engineering</span>
-        <span class="tag">LLM-based Model</span><span class="tag">Data Management</span>
-        <span class="tag">Automation</span>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-<section id="fun">
-<h2>Fun Facts</h2>
-<div class="skill-group">
-<div class="tags">
-<span class="tag">☕ Coffee enthusiast</span>
-<span class="tag">🤖 AI Automation Builder</span>
-<span class="tag">📊 Tableau Dashboard Lover</span>
-<span class="tag">🚚 Logistics Analytics</span>
-<span class="tag">🌎 Lived in China & USA</span>
-</div>
-</div>
-<div class='skill-group'><div class='skill-label'>Business</div><div class='tags'><span class='tag'>Operations Analytics</span><span class='tag'>Risk Analytics</span><span class='tag'>Business Intelligence</span><span class='tag'>Data Visualization</span><span class='tag'>Experiment Design</span><span class='tag'>Stakeholder Communication</span></div></div></section>
-
-</main>
-
-<footer>
-  © 2026 Yilin Zou · Built for GitHub Pages
-</footer>
-
+  <script>
+    const links = [...document.querySelectorAll(".nav a")];
+    const sections = links.map(link => document.querySelector(link.getAttribute("href"))).filter(Boolean);
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(link => link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id));
+        }
+      });
+    }, { rootMargin: "-30% 0px -60% 0px" });
+    sections.forEach(section => observer.observe(section));
+  </script>
 </body>
 </html>
