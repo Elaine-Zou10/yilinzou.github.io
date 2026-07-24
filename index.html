@@ -45,18 +45,7 @@
         linear-gradient(160deg, #102b4e, #0b182c 72%);
       z-index: 10;
     }
-    .monogram {
-      width: 70px;
-      height: 70px;
-      margin-bottom: 22px;
-      border: 2px solid rgba(255,255,255,.35);
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center;
-      box-shadow: 0 10px 28px rgba(0,0,0,.22);
-    }
-    .sidebar h1 { margin: 0; font-size: 25px; line-height: 1.2; }
-    .sidebar .title { margin: 10px 0 30px; color: #b8c8dc; font-size: 14px; }
+    .sidebar .title { margin: 0 0 30px; color: #b8c8dc; font-size: 14px; }
     .nav { display: grid; gap: 4px; }
     .nav a {
       padding: 9px 12px;
@@ -94,15 +83,35 @@
     .lede { max-width: 760px; color: var(--muted); font-size: 18px; }
 
     .hero {
-      min-height: 90vh;
+      min-height: 82vh;
       display: grid;
       align-items: center;
       background:
         radial-gradient(circle at 90% 15%, rgba(47,102,245,.12), transparent 34%),
         var(--paper);
     }
-    .hero h2 { max-width: 880px; margin: 12px 0 24px; font-size: clamp(43px, 7vw, 78px); letter-spacing: -.045em; }
-    .hero h2 span { color: var(--blue); }
+    .hero-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 48px;
+    }
+    .hero-profile { text-align: right; }
+    .hero-profile img {
+      width: 180px;
+      height: 180px;
+      display: block;
+      margin-left: auto;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 18px 45px rgba(16,35,63,.18);
+    }
+    .hero-profile h1 { margin: 16px 0 2px; color: var(--navy); font-size: 28px; line-height: 1.15; }
+    .hero-profile p { margin: 0; color: var(--muted); font-size: 14px; }
+    .hero-copy { max-width: 700px; }
+    .hero-copy .intro { margin: 0; color: var(--navy); font-size: clamp(28px, 4vw, 46px); font-weight: 760; line-height: 1.24; letter-spacing: -.025em; }
+    .hero-copy .intro strong { color: var(--blue); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
     .button {
       display: inline-flex;
@@ -155,6 +164,7 @@
     }
     .experience-card h3 { margin: 0 0 4px; font-size: 21px; }
     .experience-card p { margin: 10px 0 0; color: var(--muted); }
+    .experience-card .tags { margin-top: 16px; }
     .project-feature {
       overflow: hidden;
       border: 1px solid var(--line);
@@ -227,10 +237,10 @@
     .education-card h3 { margin: 0 0 5px; font-size: 19px; }
     .education-card p { margin: 0; color: var(--muted); }
     .education-card .date { margin-top: 16px; color: var(--blue); font-size: 13px; font-weight: 800; }
-    .fun-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-    .fun { padding: 22px 14px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); text-align: center; }
-    .fun span { display: block; margin-bottom: 8px; font-size: 28px; }
-    .fun b { font-size: 13px; }
+    .fun-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .fun { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); box-shadow: var(--shadow); }
+    .fun img { width: 100%; aspect-ratio: 1 / 1; display: block; object-fit: cover; }
+    .fun b { display: block; padding: 14px; font-size: 14px; text-align: center; }
 
     .contact-card { align-items: center; padding: 38px; color: #fff; background: var(--navy); border-radius: 26px; }
     .contact-card h2 { margin-bottom: 12px; color: #fff; }
@@ -264,7 +274,9 @@
     @media (max-width: 760px) {
       .container { width: min(100% - 34px, 1080px); }
       section { padding: 58px 0; }
-      .hero h2 { font-size: clamp(40px, 13vw, 58px); }
+      .hero-top { grid-template-columns: 1fr; }
+      .hero-profile { grid-row: 1; text-align: left; }
+      .hero-profile img { width: 145px; height: 145px; margin-left: 0; }
       .metrics { grid-template-columns: repeat(2, 1fr); margin-top: 42px; }
       .about-grid, .education-grid, .contact-card, .project { grid-template-columns: 1fr; }
       .experience-card, .project-gallery { grid-template-columns: 1fr; }
@@ -285,8 +297,6 @@
 </head>
 <body>
   <aside class="sidebar" aria-label="Portfolio navigation">
-    <img class="monogram" src="photo.jpg" alt="Portrait of Yilin Zou">
-    <h1>Yilin (Elaine) Zou</h1>
     <p class="title">Data &amp; Operations Analyst<br>Predictive Analytics · BI · AI</p>
     <nav class="nav">
       <a href="#about">About</a>
@@ -313,18 +323,27 @@
   <main>
     <section class="hero" id="top">
       <div class="container">
-        <p class="eyebrow">Data · Decisions · Measurable Impact</p>
-        <h2>I turn operational complexity into <span>clear, scalable decisions.</span></h2>
-        <p class="lede">I am a data and operations analyst focused on business intelligence, predictive analytics, risk modeling, and AI-powered workflow automation.</p>
-        <div class="hero-actions">
-          <a class="button primary" href="#experience">Explore my projects</a>
-          <a class="button" href="https://www.linkedin.com/in/yilin-z-503960212/" target="_blank" rel="noopener">View LinkedIn</a>
+        <div class="hero-top">
+          <div class="hero-copy">
+            <p class="eyebrow">Data · Decisions · Measurable Impact</p>
+            <p class="intro">Data and operations analyst with <strong>2+ years of experience</strong> turning complex information into practical business insights.</p>
+            <p class="lede">My work spans business intelligence, predictive analytics, risk modeling, customer analytics, and AI-powered workflow automation across logistics, insurance, marketing, and research.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="#experience">View experience</a>
+              <a class="button" href="https://www.linkedin.com/in/yilin-z-503960212/" target="_blank" rel="noopener">View LinkedIn</a>
+            </div>
+          </div>
+          <div class="hero-profile">
+            <img src="photo.jpg" alt="Portrait of Yilin Zou">
+            <h1>Yilin (Elaine) Zou</h1>
+            <p>Data &amp; Operations Analyst · Seattle, WA</p>
+          </div>
         </div>
         <div class="metrics" aria-label="Selected impact">
-          <div class="metric"><b>80%</b><span>faster exception response</span></div>
-          <div class="metric"><b>8%</b><span>on-time delivery lift</span></div>
-          <div class="metric"><b>4.58%</b><span>forecast MAPE achieved</span></div>
-          <div class="metric"><b>3</b><span>peer-reviewed publications</span></div>
+          <div class="metric"><b>4</b><span>organizations</span></div>
+          <div class="metric"><b>19+</b><span>analytics tools &amp; platforms</span></div>
+          <div class="metric"><b>2+</b><span>years of experience</span></div>
+          <div class="metric"><b>4</b><span>industry domains</span></div>
         </div>
       </div>
     </section>
@@ -332,7 +351,6 @@
     <section id="about">
       <div class="container">
         <p class="eyebrow">About</p>
-        <h2>Analytics built for action.</h2>
         <div class="about-grid">
           <div class="panel">
             <p>I work where data, operations, and business strategy meet. My experience spans last-mile logistics, insurance and annuity risk, customer analytics, and academic research. I enjoy building the full analytics lifecycle—from clean data foundations and predictive models to dashboards and automated decision workflows that people actually use.</p>
@@ -349,22 +367,21 @@
     <section id="experience">
       <div class="container">
         <p class="eyebrow">Experience</p>
-        <h2>Professional experience.</h2>
         <div class="experience-list">
           <article class="experience-card">
-            <div><h3>Operational Data Analyst · <span class="company">Gofo, Inc.</span></h3><p>Build BI pipelines, operational dashboards, AI-assisted exception monitoring, and cost analyses that support last-mile delivery decisions across more than 30 stations.</p></div>
+            <div><h3>Operational Data Analyst · <span class="company">Gofo, Inc.</span></h3><p>Build BI pipelines, operational dashboards, AI-assisted exception monitoring, and cost analyses that support last-mile delivery decisions across more than 30 stations.</p><div class="tags"><span class="tag">SQL</span><span class="tag">Python (Pandas, NumPy)</span><span class="tag">Snowflake</span><span class="tag">AWS</span><span class="tag">Cloud Data Platforms</span><span class="tag">Tableau</span><span class="tag">SAP</span></div></div>
             <div class="job-meta">Seattle, WA<br>Mar 2026 — Present</div>
           </article>
           <article class="experience-card">
-            <div><h3>Data Science Intern · <span class="company">Legacy Agencies</span></h3><p>Developed customer-data pipelines, predictive segmentation, funnel analysis, and experiments to improve marketing targeting and conversion.</p></div>
+            <div><h3>Data Science Intern · <span class="company">Legacy Agencies</span></h3><p>Developed customer-data pipelines, predictive segmentation, funnel analysis, and experiments to improve marketing targeting and conversion.</p><div class="tags"><span class="tag">SQL</span><span class="tag">Python (Scikit-learn)</span><span class="tag">PySpark</span><span class="tag">Looker</span><span class="tag">Salesforce</span><span class="tag">Google Analytics</span></div></div>
             <div class="job-meta">Oak Brook, IL<br>Jun 2025 — Aug 2025</div>
           </article>
           <article class="experience-card">
-            <div><h3>Risk Modeling Data Scientist, COOP · <span class="company">Reinsurance Group of America</span></h3><p>Created annuity cash-flow forecasts and mortality stress-testing frameworks for long-horizon financial risk assessment.</p></div>
+            <div><h3>Risk Modeling Data Scientist, COOP · <span class="company">Reinsurance Group of America</span></h3><p>Created annuity cash-flow forecasts and mortality stress-testing frameworks for long-horizon financial risk assessment.</p><div class="tags"><span class="tag">SQL</span><span class="tag">Python (Pandas, NumPy, Scikit-learn)</span><span class="tag">R</span><span class="tag">Power BI</span><span class="tag">Excel (VBA)</span></div></div>
             <div class="job-meta">Champaign, IL<br>Jan 2025 — May 2025</div>
           </article>
           <article class="experience-card">
-            <div><h3>Quantitative Research Analyst · <span class="company">ShanghaiTech University</span></h3><p>Managed large-scale research datasets and applied statistical modeling, hypothesis testing, NLP, and clustering across five research projects.</p></div>
+            <div><h3>Quantitative Research Analyst · <span class="company">ShanghaiTech University</span></h3><p>Managed large-scale research datasets and applied statistical modeling, hypothesis testing, NLP, and clustering across five research projects.</p><div class="tags"><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Hadoop</span><span class="tag">Git</span><span class="tag">SPSS</span><span class="tag">Stata</span></div></div>
             <div class="job-meta">Shanghai, China<br>Jun 2022 — May 2024</div>
           </article>
         </div>
@@ -374,7 +391,6 @@
     <section id="projects">
       <div class="container">
         <p class="eyebrow">Projects</p>
-        <h2>Selected analytical work.</h2>
         <article class="project-feature">
           <div class="project-intro">
             <h3>Nowcasting Inflation under Structural Shocks</h3>
@@ -404,11 +420,10 @@
     <section id="skills">
       <div class="container">
         <p class="eyebrow">Skills</p>
-        <h2>A practical analytics toolkit.</h2>
         <div class="skill-columns">
-          <div class="skill-card"><h3>Data &amp; Engineering</h3><div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">R</span><span class="tag">PySpark</span><span class="tag">Snowflake</span><span class="tag">MySQL</span><span class="tag">Hadoop</span><span class="tag">ETL</span></div></div>
-          <div class="skill-card"><h3>Analytics &amp; ML</h3><div class="tags"><span class="tag">XGBoost</span><span class="tag">Random Forest</span><span class="tag">Regression</span><span class="tag">NLP</span><span class="tag">K-means</span><span class="tag">A/B Testing</span><span class="tag">Risk Modeling</span></div></div>
-          <div class="skill-card"><h3>BI &amp; Business</h3><div class="tags"><span class="tag">Tableau</span><span class="tag">Excel</span><span class="tag">VBA</span><span class="tag">SAP</span><span class="tag">KPI Design</span><span class="tag">Data Visualization</span><span class="tag">Stakeholder Communication</span></div></div>
+          <div class="skill-card"><h3>Data &amp; Cloud</h3><div class="tags"><span class="tag">SQL</span><span class="tag">Snowflake</span><span class="tag">AWS</span><span class="tag">Cloud Data Platforms</span><span class="tag">PySpark</span><span class="tag">Hadoop</span><span class="tag">Git</span></div></div>
+          <div class="skill-card"><h3>Programming &amp; Analytics</h3><div class="tags"><span class="tag">Python (Pandas, NumPy, Scikit-learn)</span><span class="tag">R</span><span class="tag">SPSS</span><span class="tag">Stata</span><span class="tag">VBA</span></div></div>
+          <div class="skill-card"><h3>BI &amp; Business Systems</h3><div class="tags"><span class="tag">Tableau</span><span class="tag">Power BI</span><span class="tag">Looker</span><span class="tag">Salesforce</span><span class="tag">Google Analytics</span><span class="tag">SAP</span><span class="tag">Excel (VBA)</span></div></div>
         </div>
       </div>
     </section>
@@ -416,7 +431,6 @@
     <section id="education">
       <div class="container">
         <p class="eyebrow">Education</p>
-        <h2>Where quantitative rigor began.</h2>
         <div class="education-grid">
           <div class="education-card"><h3>University of Illinois Urbana-Champaign</h3><p>M.S. in Predictive Analytics &amp; Risk Management</p><div class="date">AUG 2024 — DEC 2025 · CHAMPAIGN, IL</div></div>
           <div class="education-card"><h3>ShanghaiTech University</h3><p>B.S. in Physics</p><div class="date">SEP 2018 — JUN 2022 · SHANGHAI, CHINA</div></div>
@@ -427,13 +441,11 @@
     <section id="fun">
       <div class="container">
         <p class="eyebrow">Fun Facts</p>
-        <h2>A little beyond the dashboards.</h2>
         <div class="fun-grid">
-          <div class="fun"><span>☕</span><b>Coffee enthusiast</b></div>
-          <div class="fun"><span>🤖</span><b>AI automation builder</b></div>
-          <div class="fun"><span>📊</span><b>Dashboard storyteller</b></div>
-          <div class="fun"><span>🚚</span><b>Logistics curious</b></div>
-          <div class="fun"><span>🌏</span><b>China &amp; USA</b></div>
+          <div class="fun"><img src="fun-cat.jpg" alt="Yilin with a cat" loading="lazy"><b>Cat person</b></div>
+          <div class="fun"><img src="fun-skydiving.jpg" alt="Yilin skydiving" loading="lazy"><b>Skydiving</b></div>
+          <div class="fun"><img src="fun-art.png" alt="Digital artwork by Yilin" loading="lazy"><b>Drawing</b></div>
+          <div class="fun"><img src="fun-photography.jpg" alt="Mountain landscape photographed by Yilin" loading="lazy"><b>Photography</b></div>
         </div>
       </div>
     </section>
@@ -441,7 +453,7 @@
     <section id="contact">
       <div class="container">
         <div class="contact-card">
-          <div><p class="eyebrow">Contact</p><h2>Let’s turn data into action.</h2><p>I am always glad to connect about analytics, business intelligence, applied AI, and data-driven operations.</p></div>
+          <div><p class="eyebrow">Contact</p><p>I am always glad to connect about analytics, business intelligence, applied AI, and data-driven operations.</p></div>
           <div class="contact-links">
             <a href="mailto:yilin1010110@gmail.com">Email · yilin1010110@gmail.com</a>
             <a href="tel:+12174021709">Phone · +1 217 402 1709</a>
