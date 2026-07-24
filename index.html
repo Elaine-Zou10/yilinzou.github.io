@@ -110,8 +110,10 @@
     .hero-profile h1 { margin: 16px 0 2px; color: var(--navy); font-size: 28px; line-height: 1.15; }
     .hero-profile p { margin: 0; color: var(--muted); font-size: 14px; }
     .hero-copy { max-width: 700px; }
-    .hero-copy .intro { margin: 0; color: var(--navy); font-size: clamp(28px, 4vw, 46px); font-weight: 760; line-height: 1.24; letter-spacing: -.025em; }
-    .hero-copy .intro strong { color: var(--blue); }
+    .hero-copy .intro { margin: 0; color: var(--navy); }
+    .hero-copy .intro-title { display: block; font-size: clamp(38px, 5.5vw, 64px); font-weight: 800; line-height: 1.08; letter-spacing: -.04em; }
+    .hero-copy .intro-detail { display: block; max-width: 620px; margin-top: 18px; color: var(--muted); font-size: clamp(18px, 2vw, 24px); font-weight: 520; line-height: 1.45; letter-spacing: -.01em; }
+    .hero-copy .intro-detail strong { color: var(--blue); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
     .button {
       display: inline-flex;
@@ -326,7 +328,7 @@
         <div class="hero-top">
           <div class="hero-copy">
             <p class="eyebrow">Data · Decisions · Measurable Impact</p>
-            <p class="intro">Data and operations analyst with <strong>2+ years of experience</strong> turning complex information into practical business insights.</p>
+            <p class="intro"><span class="intro-title">Data and operations analyst</span><span class="intro-detail">with <strong>2+ years of experience</strong> turning complex information into practical business insights.</span></p>
             <p class="lede">My work spans business intelligence, predictive analytics, risk modeling, customer analytics, and AI-powered workflow automation across logistics, insurance, marketing, and research.</p>
             <div class="hero-actions">
               <a class="button primary" href="#experience">View experience</a>
